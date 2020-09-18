@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Swiggy</title>
+    <%= csrf_meta_tags %>
+    
+
+<%= javascript_include_tag 'https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js' %>
+<%= stylesheet_link_tag 'https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' %>
+<%= javascript_include_tag  "https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js" %>
+    <%= stylesheet_link_tag   'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %>
+    <%= javascript_include_tag  'https://code.jquery.com/jquery-3.2.1.slim.min.js'  %>
+    <%= javascript_include_tag  'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' %>
+    <%= javascript_include_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js' %>
+
+ 
+    </head>
+
+  <body>
+  <%if !user_signed_in? %>
+  <li class="d-none font-weight-bold text-danger" >Navbar</li>
+
+<% else %>
+<nav class="navbar navbar-expand navbar-white bg-white">
+  <a class="navbar-brand" href="http://localhost:3000/landingpage"><img src="https://i.pinimg.com/originals/69/df/f3/69dff3d81877bb46865f656de053e96e.png" width="160" height="40" /></a>
+
+  <div>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link text-dark px-4 py-3" data-toggle="modal" data-target="#exampleModal" href="#"><i class="fa fa-search px-3" aria-hidden="true"></i>Search</a>
+      </li>
+  
+      <div style="border-radius:0;" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header" style="background:#ff5d0b;">
+              <h5 class="modal-title text-white text-center  font-weight-bold" id="exampleModalLabel" style="margin-left: 145px;">SEARCH ITEMS</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            <%=form_for :order, :url => {:controller => 'landingpage',:action => "create"},:method => "post"  do |order| %>
+              <div class="field d-flex justify-content-center">
+              <%= order.text_field :search,placeholder: "Search Items by name,hotel",class: "form-control loginbox",:required => true %>
+              </div>
+            <div class="d-flex justify-content-center my-3">
+            <%= order.submit "Search" ,class: "font-weight-bold btn btn-dark btn-sm px-3  py-2",style: "border-radius:0;" %>
+              </div>
+          <% end %>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+
+      <li class="nav-item">
+        <a class="nav-link text-dark px-4 py-3" href="#"><i class="fa fa-cogs px-3" aria-hidden="true"></i>Offers</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link text-dark px-4 py-3" href="http://localhost:3000/orders"><i class="fa fa-info px-3" aria-hidden="true"></i>Orders</a>
+    </li>
+    <% if user_signed_in? %>
+    <li class="nav-item">
+    <a class="nav-link text-dark px-4 py-3" data-method="delete" href="http://localhost:3000/users/sign_out"><i class="fa fa-sign-out px-3" aria-hidden="true"></i>Logout</a>
+  </li>
+    <% else %>
+    <li class="nav-item">
+    <a class="nav-link text-dark px-4 py-3" href="http://localhost:3000/users/sign_in"><i class="fa fa-user-plus px-3" aria-hidden="true"></i>Signin</a>
+  </li>
+  <% end %>
+  <li class="nav-item">
+  <a class="nav-link text-dark px-4 py-3" href="http://localhost:3000/cart"><i class="fa fa-shopping-cart px-3" aria-hidden="true"></i>Cart</a>
+</li>
+    </ul>
+  </div>
+</nav>
+<% end %>
+
+    <%= yield %>
+    <% if alert %>
+  <p class="alert  text-center text-white bg-danger font-weight-bold"><%= alert %></p>
+  <% end %>
+  </body>
+</html>

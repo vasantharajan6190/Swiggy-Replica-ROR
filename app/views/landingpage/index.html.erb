@@ -1,0 +1,46 @@
+<div style="background-color:#171a29;height:340px;">
+<div class="container pt-4">
+<img class="mr-3 displayy imgg" width="260" height="260" src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/dya8c4z9hpf0hsifz7vx">
+<img class="mr-3 d-none d-lg-inline imgg" width="260" height="260" src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/mudxtokgxfjemq0aii74">
+<img class="mr-3 displayy imgg" width="260" height="260" src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/w9ikmnc6eigmlf5n1p91">
+<img class="d-none d-lg-inline imgg" width="260" height="260" src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_520,h_520/rng/md/carousel/production/ztpd5q9awnmmnefczn5x">
+</div>
+</div>
+
+<div class="container mt-4">
+<h4 class="mb-5 pb-4" style="font-size: 28px;font-weight: 600;border-bottom:2px solid gray;">Top Picks</h4>
+</div>
+<div class="container">
+<div class="row">
+
+
+<% @items.each  do |f| %>
+    <div class=" col-lg-4 mb-5 d-flex justify-content-center">
+    <div class="card" style="width: 18rem;border:0;">
+    <%= image_tag f["img"],class: "card-img-top landingpageimage img-fluid" %>
+    <div class="card-body">
+    <p class="text-muted text-left m-0 p-0 font-weight-bold"><%= f["hotel"].upcase %></p>  
+        <div class="card-title d-flex">
+       <% if f["foodtype"]==="veg" %>
+       <img style="margin-top:3px;" src="https://oslocks.files.wordpress.com/2014/11/vegetarian-symbol.png" width="20"  height="20"/>
+       <% else %>
+       <img style="margin-top:5px;" src="https://infoseekershub.com/wp-content/uploads/2019/08/non-veg.jpg" width="15"  height="15"/>
+       <% end %>
+
+        <h5 class="ml-2"><%= f["name"].capitalize %></h5>
+        </div>
+        <p class="card-subtitle mb-2 text-muted"><%= f["describe"].capitalize %></p>
+        <div class="d-flex justify-content-between">
+        <div><p class="text-muted" style="font-weight:600;">Rs.<%= f["price"] %></p></div>
+        <% if user_signed_in? %>
+        <div><%= link_to "ADD",landingpage_path(f),class: "btn text-success addbutton px-4 font-weight-bold",style: "border-radius:0;font-size:14px;" %></div>
+        <% else %>
+        <div><%= link_to "ADD",new_user_session_path,class: "btn text-success addbutton px-4 font-weight-bold",style: "border-radius:0;font-size:14px;" %></div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+    </div>
+<% end %>
+</div>
+</div>

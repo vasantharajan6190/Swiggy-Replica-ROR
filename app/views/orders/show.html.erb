@@ -1,0 +1,163 @@
+<div class="container">
+
+<div class="my-4">
+<h3 class="text-center font-weight-bold"> <%= @ordered_item.name.upcase %> </h3>
+</div>
+<div class="text-left">
+
+<div class="d-flex">
+<h5 class="font-weight-bold mr-2">HOTEL:</h5>
+<p class="font-weight-normal"><%= @ordered_item.hotel %></p>
+</div>
+<div class="d-flex">
+<h5 class="font-weight-bold mr-2">PRICE:</h5>
+<p class="font-weight-normal"><%= @ordered_item.price %></p>
+</div>
+<div class="d-flex">
+<h5 class="font-weight-bold mr-2">ADDRESS:</h5>
+<p class="font-weight-normal"><%= @ordered_item.address %></p>
+</div>
+
+</div>
+<script
+src="https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js"
+charset="utf-8"
+></script>
+<div class="overlay d-none">
+<button id="replay">Replay</button>
+</div>
+<h4 class="font-weight-bold text-left mt-3">
+YOUR ORDER TRACKING : 
+</h4>
+<div class="font-weight-normal d-flex my-3"><h6 class="font-weight-bold font-italic">Total Distance : <span id="distance"></span> </h6></div>
+<div class="mt-3  mb-5 d-flex justify-content-center">
+<div id='map'  style='width: 800px; height: 500px;'></div>
+</div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibWFoYXBlcml5YXZhcjEwMCIsImEiOiJjazVkcmdjZm0xcnZvM2RyZjQxcjBqcmFrIn0.9iPjpKepyPv5wEdNmfL2Ug';
+var map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mapbox/streets-v11',
+center: [77.0188,11.0318],
+zoom:12
+});
+var new_york = new mapboxgl.LngLat(77.0188,11.0318);
+var los_angeles = new mapboxgl.LngLat(<%= @result.longitude %>,<%= @result.latitude %>);
+sample = new_york.distanceTo(los_angeles);
+document.getElementById("distance").innerHTML = Math.round(sample/1000) + "Km"
+var marker = new mapboxgl.Marker()
+.setLngLat([77.0188,11.0318])
+.addTo(map);
+
+var marker = new mapboxgl.Marker()
+.setLngLat([<%= @result.longitude %>,<%= @result.latitude %>])
+.addTo(map);
+
+
+
+
+var origin = [77.0188,11.0318];
+var destination = [<%= @result.longitude %>,<%= @result.latitude %>];
+var route = {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'geometry': {
+'type': 'LineString',
+'coordinates': [origin, destination]
+}
+}
+]
+};
+var point = {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'properties': {},
+'geometry': {
+'type': 'Point',
+'coordinates': origin
+}
+}
+]
+};
+ 
+var lineDistance = turf.lineDistance(route.features[0], 'kilometers'); 
+var arc = [];
+var steps = 30000;
+for (var i = 0; i < lineDistance; i += lineDistance / steps) {
+var segment = turf.along(route.features[0], i, 'kilometers');
+arc.push(segment.geometry.coordinates);
+}
+route.features[0].geometry.coordinates = arc;
+var counter = 0;
+map.on('load', function() {
+map.addSource('route', {
+'type': 'geojson',
+'data': route
+});
+ 
+map.addSource('point', {
+'type': 'geojson',
+'data': point
+});
+ 
+map.addLayer({
+'id': 'route',
+'source': 'route',
+'type': 'line',
+'paint': {
+'line-width': 6,
+'line-color': '#888'
+}
+});
+ 
+map.addLayer({
+'id': 'point',
+'source': 'point',
+'type': 'symbol',
+'layout': {
+'icon-image': 'airport-15',
+'icon-rotate': ['get','bearing'],
+'icon-size': 1.5,
+'icon-rotation-alignment': 'map',
+'icon-allow-overlap': true,
+'icon-ignore-placement': true
+}
+});
+ 
+function animate() {
+point.features[0].geometry.coordinates =
+route.features[0].geometry.coordinates[counter];
+point.features[0].properties.bearing = turf.bearing(
+turf.point(
+route.features[0].geometry.coordinates[
+counter >= steps ? counter - 1 : counter
+]
+),
+turf.point(
+route.features[0].geometry.coordinates[
+counter >= steps ? counter : counter + 1
+]
+)
+);
+map.getSource('point').setData(point);
+if (counter < steps) {
+requestAnimationFrame(animate);
+}
+counter = counter + 1;
+}
+document.getElementById('replay').addEventListener('click', function() {
+point.features[0].geometry.coordinates = origin;
+map.getSource('point').setData(point);
+counter = 0;
+animate(counter);
+});
+animate(counter);
+});
+
+</script>
+
+</div>

@@ -1,0 +1,20 @@
+<div style=" position:fixed;
+top: 50%;
+left: 50%;
+width:30em;
+height:18em;
+margin-top: -13em;
+margin-left: -16em;">
+<a href="http://localhost:3000" class="d-flex justify-content-center" ><img src="https://i.pinimg.com/originals/69/df/f3/69dff3d81877bb46865f656de053e96e.png" width="230"/></a>
+<h2 class="text-center mt-3">OTP  Generation</h2>
+
+<%=form_for :otp, :url => {:action => "create"}, :method => "post" do |f| %>
+    <div class="field d-flex justify-content-center">
+    <%= f.text_field :mobile,placeholder: "Mobile No ",class: "form-control loginbox",:required => true %>
+  </div>
+
+  <div class="actions d-flex justify-content-center">
+  <%= f.submit "Generate OTP",class: "my-4 btn btn-block text-white font-weight-bold",style: "background-color:#ff5d0b;border-radius:0;" %>
+</div>
+<% end %>
+</div>

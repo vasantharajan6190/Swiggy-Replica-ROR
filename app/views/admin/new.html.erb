@@ -1,0 +1,32 @@
+<div style=" position:absolute;
+left: 50%;
+width:30em;
+height:18em;
+margin-top:20px;
+margin-left: -16em;">
+<h4 class="text-center my-2">ADD NEW ITEM</h4>
+<%= form_for :item, :url => {:action => "create"}, :method => "post" do |f| %>
+    <div class="field d-flex justify-content-center">
+      <%= f.text_field :hotel,placeholder: "Hotel Name",class: "form-control loginbox" %>
+    </div>
+    <div class="field d-flex justify-content-center">
+    <%= f.text_field :name,placeholder: "Dish Name",class: "form-control loginbox" %>
+  </div>
+  <div class="field d-flex justify-content-center">
+      <%= f.text_field :foodtype,placeholder: "veg or non-veg",class: "form-control loginbox" %>
+    </div>
+    <div class="field d-flex justify-content-center">
+      <%= f.text_field :describe,placeholder: "Description",class: "form-control loginbox" %>
+    </div>
+    <div class="field d-flex justify-content-center">
+      <%= f.text_field :img,placeholder: "Image Url",class: "form-control loginbox" %>
+    </div>
+    <div class="field d-flex justify-content-center">
+      <%= f.text_field :price,placeholder: "Price in Rs.",class: "form-control loginbox" %>
+    </div>
+    <div class="actions d-flex justify-content-center">
+      <%= f.submit "ADD",class: "my-4 btn btn-block text-white font-weight-bold",style: "background-color:#ff5d0b;border-radius:0;" %>
+    </div>
+  <% end %>
+  </div>
+  

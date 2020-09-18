@@ -1,0 +1,77 @@
+// Place all the styles related to the Homepage controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.home:focus {
+    border-color: #ff5d0b;
+    box-shadow: 0 0 0 0.1rem rgb(250, 82, 4);
+}
+.home::placeholder{
+    font-weight:500;
+    color:gray;
+    font-size:20px;
+}
+
+.loginbox::placeholder{
+    font-size:12px;
+    font-weight: 500;
+    color: gray;
+    padding-bottom: 10px;
+}
+.loginbox:focus{
+    box-shadow: none;
+}
+hr{
+    border:1.5px solid black;
+    width: 5%;
+    position: relative;
+    left: -26px;
+    top: -2px;
+}
+.ref {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #5d8ed5;
+    cursor: pointer;
+}
+.terms{
+    font-size: 12px;
+    color: #7e808c;
+    margin-top: 2px;
+    font-weight: 500;
+}
+.signuphr{
+    border:1.5px solid black;
+    width: 5%;
+    position: relative;
+    left: -39px;
+    top: -6px;
+}
+.loginbox{
+ border-radius: 0;
+ height:70px !important;
+}
+@media screen and (max-width: 767px) {
+    .onsmall {margin-top:20px;}
+    }
+    .foot:hover{
+      font-weight: 700 !important;
+      text-decoration: none !important;
+    }
+.imgfoot:hover{
+    width:220px;
+}
+.bb:hover{
+   color: #ff5d0b !important;
+}
+.login{
+    color: black;
+    font-size: 18px;
+    font-weight: 700;
+    padding-top: 15px;
+}
+.login:hover{
+    color: #ff5d0b !important;
+    cursor: pointer;
+    text-decoration: none;
+}

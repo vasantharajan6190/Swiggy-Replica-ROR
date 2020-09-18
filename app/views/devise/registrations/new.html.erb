@@ -1,0 +1,38 @@
+<%= render "devise/shared/error_messages", resource: resource %>
+<div style=" position:fixed;
+top: 50%;
+left: 50%;
+width:30em;
+height:18em;
+margin-top: -18em;
+margin-left: -16em;">
+<a href="http://localhost:3000" class="d-flex justify-content-center mb-2" ><img src="https://i.pinimg.com/originals/69/df/f3/69dff3d81877bb46865f656de053e96e.png" width="230"/></a>
+
+<h2 class="text-center">Sign up<br><p class="mt-2 pl-5" style="font-size:14px;">or <a href="http://localhost:3000/users/sign_in" style="color:#ff5d0b;">login to your account<a/><br><hr class="signuphr"></p></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+ 
+
+  <div class="field d-flex justify-content-center">
+    <%= f.email_field :email,placeholder: "Email",class: "form-control loginbox",:required =>true, autofocus: true, autocomplete: "email" %>
+  </div>
+  <div class="field d-flex justify-content-center">
+  <%= f.text_field :name,placeholder: "Name",class: "form-control loginbox",:required =>true, autocomplete: "name" %>
+</div>
+  <div class="field d-flex justify-content-center">
+    <%= f.text_field :mobile,placeholder: "Mobile",class: "form-control loginbox",:required =>true, autocomplete: "mobile" %>
+  </div>
+
+  <div class="field d-flex justify-content-center">
+    <%= f.password_field :password,placeholder: "Password",class: "form-control loginbox",:required =>true, autocomplete: "new-password" %>
+  </div>
+
+  <p class="ref">Have a referral code?</p>
+
+  <div class="actions d-flex justify-content-center">
+    <%= f.submit "CONTINUE",class: "mt-2 btn btn-block text-white font-weight-bold",style: "background-color:#ff5d0b;border-radius:0;" %>
+  </div>
+  <p class="terms">By creating an account, I accept the<span style="color:#5d8ed5;cursor:pointer;"> Terms & Conditions</span></p>
+<% end %>
+
+<div/>

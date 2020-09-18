@@ -1,0 +1,54 @@
+// Place all the styles related to the cart controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.card-img{
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+.cart:hover{
+        box-shadow: 2px 2px 10px 9px #c5c5c5;
+}
+.plus:hover{
+  color:#ff5d0b;
+  cursor: pointer;
+}
+.minus:hover{
+    color:#ff5d0b;
+    cursor: pointer;
+  }
+  .fix{
+    top: 230px;
+    left: 850px;
+    position:fixed;
+  }
+  .cartdetail{
+    box-shadow: 2px 5px 8px #c5c5c5;
+  }
+  .btn-danger:hover{
+    box-shadow: 2px 5px 8px #c5c5c5;
+  }
+  .btn-success:hover{
+    box-shadow: 2px 5px 8px #c5c5c5;
+  }
+  .sa{
+    background-color:#ff5d0b;
+    border-radius: 0;
+  }
+  .back{
+    width: 271px;
+    height: 256px;
+    background-image: url(https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/2xempty_cart_yfxml0);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+  }
+  .cartempty{
+    position:fixed;
+top: 50%;
+left: 50%;
+width:30em;
+height:18em;
+margin-top: 7em;
+margin-left: -14em;
+  }

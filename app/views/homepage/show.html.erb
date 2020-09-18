@@ -1,0 +1,20 @@
+<div style=" position:fixed;
+top: 50%;
+left: 50%;
+width:30em;
+height:18em;
+margin-top: -13em;
+margin-left: -16em;">
+<a href="http://localhost:3000" class="d-flex justify-content-center" ><img src="https://i.pinimg.com/originals/69/df/f3/69dff3d81877bb46865f656de053e96e.png" width="230"/></a>
+<h2 class="text-center mt-3">OTP Verification<br><p class="mt-2 pl-5" style="font-size:14px;">or <a href="http://localhost:3000/users/sign_up" style="color:#ff5d0b;">Resend OTP<a/><br><hr></p></h2>
+
+<%=form_for :otp, :url => check_path{@id} do |f| %>
+    <div class="field d-flex justify-content-center">
+    <%= f.text_field :otpcode,placeholder: "Enter Your OTP",class: "form-control loginbox",:required => true %>
+  </div>
+
+  <div class="actions d-flex justify-content-center">
+  <%= f.submit "NEXT",class: "my-4 btn btn-block text-white font-weight-bold",style: "background-color:#ff5d0b;border-radius:0;" %>
+</div>
+<% end %>
+</div>

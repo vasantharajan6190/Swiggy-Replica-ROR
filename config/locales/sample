@@ -1,0 +1,43 @@
+ <script>
+    $(document).ready(function() {
+       $(".price").html("1")
+        var price =1
+        var basicprice =0 
+  $('.fa-plus').click(function(event){
+    price +=1
+    if(price>0){
+        $(".fa-minus").show()
+      }
+      var w = $(".total").html()
+      var p = w.toString()
+      var sp = p.split(".")[1]
+      var atlast = parseInt(sp)
+      if(basicprice===0){
+        basicprice = atlast
+      }
+      var sss = basicprice*price
+      $(".total").html("Rs."+sss)
+    $(".price").html(price)
+  });
+  $('.fa-minus').click(function(event){
+    price -=1
+    if(price===0){
+        $(".fa-minus").hide(function(){
+            basicprice =0
+        })
+      }
+      var w = $(".total").html()
+      var p = w.toString()
+      var sp = p.split(".")[1]
+      var atlast = parseInt(sp)
+      var sss = atlast-basicprice
+      $(".total").html("Rs."+sss)
+    $(".price").html(price)
+  });
+});
+    </script>
+
+
+
+
+    ,paytm_payment_path
